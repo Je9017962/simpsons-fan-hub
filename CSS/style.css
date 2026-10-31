@@ -1,0 +1,218 @@
+/* ==========================================================================
+   style.css — SHARED styles for every page (owned by the group leader)
+   Naming: BEM  ->  .block, .block__element, .block--modifier
+   Page-specific styles go in css/page2.css and css/page3.css, not here.
+   ========================================================================== */
+
+/* ---------- Design tokens (change colors/fonts here only) ---------- */
+:root {
+  --color-yellow: #ffd90f;   /* Simpsons yellow */
+  --color-sky: #70d1fe;      /* Springfield sky */
+  --color-pink: #f14e9c;     /* donut frosting  */
+  --color-dark: #1d1d1b;
+  --color-light: #fffdf3;
+  --color-muted: #5b5b55;
+
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Arial Black", "Helvetica Neue", Impact, sans-serif;
+
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --radius: 12px;
+  --max-width: 1100px;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+  display: flex;               /* flexbox: keeps footer at the bottom */
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- Block: header ---------- */
+.header {
+  background-color: var(--color-sky);
+  border-bottom: 4px solid var(--color-dark);
+}
+
+.header__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md);
+  display: flex;               /* flexbox */
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.header__logo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--color-yellow);
+  text-decoration: none;
+  -webkit-text-stroke: 1.5px var(--color-dark);
+  animation: logo-drop 0.8s ease-out both;   /* CSS animation */
+}
+
+/* ---------- Block: nav ---------- */
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;               /* flexbox */
+  gap: var(--space-sm);
+}
+
+.nav__link {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 700;
+  color: var(--color-dark);
+  text-decoration: none;
+  background-color: var(--color-yellow);
+  border: 2px solid var(--color-dark);
+  border-radius: 999px;
+  /* CSS transition */
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  background-color: var(--color-pink);
+  transform: translateY(-3px);
+}
+
+.nav__link--active {
+  background-color: var(--color-dark);
+  color: var(--color-yellow);
+}
+
+/* ---------- Block: main ---------- */
+.main {
+  flex: 1;                     /* pushes footer down */
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+}
+
+/* ---------- Block: section (reusable on every page) ---------- */
+.section {
+  margin-bottom: var(--space-lg);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin: 0 0 var(--space-md);
+}
+
+/* ---------- Block: card (reusable on every page) ---------- */
+.card {
+  background-color: #fff;
+  border: 3px solid var(--color-dark);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  box-shadow: 5px 5px 0 var(--color-dark);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--color-dark);
+}
+
+.card__title {
+  margin: 0 0 var(--space-sm);
+}
+
+.card__text {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* ---------- Block: footer ---------- */
+.footer {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.footer__text {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* ---------- Animations ---------- */
+@keyframes logo-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Responsive: tablet (768px and below) ---------- */
+@media (max-width: 768px) {
+  .header__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section__title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ---------- Responsive: phone (480px and below) ---------- */
+@media (max-width: 480px) {
+  .nav__list {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav {
+    width: 100%;
+  }
+
+  .nav__link {
+    display: block;
+    text-align: center;
+  }
+
+  .header__logo {
+    font-size: 1.4rem;
+  }
+}
