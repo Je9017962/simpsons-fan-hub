@@ -1,7 +1,7 @@
 /* ==========================================================================
    style.css — SHARED styles for every page (owned by the group leader)
    Naming: BEM  ->  .block, .block__element, .block--modifier
-   Page-specific styles go in css/page2.css and css/page3.css, not here.
+   Page-specific styles go in CSS/page2.css and CSS/page3.css, not here.
    ========================================================================== */
 
 /* ---------- Design tokens (change colors/fonts here only) ---------- */
@@ -101,8 +101,10 @@ img {
   transform: translateY(-3px);
 }
 
-.nav__link--active {
-  background-color: var(--color-dark);
+.nav__link--active,
+.nav__link--active:hover,
+.nav__link--active:focus-visible {
+  background-color: var(--color-dark);   /* stay dark on hover: yellow text on pink is unreadable */
   color: var(--color-yellow);
 }
 
